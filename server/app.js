@@ -7,7 +7,8 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import fileUpload from "express-fileupload";
 import cors from "cors";
-import createHttpError from "http-errors"
+import createHttpError from "http-errors";
+import routes from "./routes/index.js"
 
 //dot env config
 dotenv.config();
@@ -42,10 +43,8 @@ app.use(fileUpload({
 //cors 
 app.use(cors({origin: "http://localhost:3000"}))
 
-app.get('/test', (req, res) => {
-    res.send(req.body);
-   //throw createHttpError.BadRequest("this route has an error");
-});
+//route
+app.use('/api/v1', routes);
 
 //Not fount route handling
 

@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "http-errors": "^2.0.0"
+    "http-errors": "^2.0.0",
+    "trim-request": "^1.0.6"
   }
 }
