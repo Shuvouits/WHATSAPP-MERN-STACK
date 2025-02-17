@@ -1,13 +1,19 @@
-
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
     <div className="dark">
 
-      <h1 className="dark:bg-dark_bg_1">
-        <p className="text-black dark:text-white">React tailwind Ninja</p>
-        
-      </h1>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+        </Routes>
+      </Router>
     
     </div>
   );
