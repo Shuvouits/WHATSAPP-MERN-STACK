@@ -1,11 +1,11 @@
-import ChatIcon from "./svg/Chat";
 
 
 function App() {
   return (
     <div>
-       <h1>React js Project continue</h1>
-       <ChatIcon className="red" />
+
+      <h1 className="text-red-500">React tailwind Ninja</h1>
+    
     </div>
   );
 }
