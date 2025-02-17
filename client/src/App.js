@@ -2,9 +2,12 @@
 
 function App() {
   return (
-    <div>
+    <div className="dark">
 
-      <h1 className="text-red-500">React tailwind Ninja</h1>
+      <h1 className="dark:bg-dark_bg_1">
+        <p className="text-black dark:text-white">React tailwind Ninja</p>
+        
+      </h1>
     
     </div>
   );
