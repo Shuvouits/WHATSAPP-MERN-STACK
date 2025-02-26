@@ -1,11 +1,33 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userReducer from "../features/userSlice.js"; // ✅ Default export properly import
+import storage from "redux-persist/lib/storage"
+import {persistReducer, persistStore} from "redux-persist"
+import { userSlice } from "../features/userSlice.js"; // ✅ Default export properly import
+
+//saveUseronlyFilter
+const saveUserOnlyFilter = createFilter("user", ["user.user"])
+
+
+//persist config
+const persistConfig = {
+    key: "user",
+    storage,
+    whiteList: ["user"],
+    transforms: [saveUserOnlyFilter]
+}
 
 const rootReducer = combineReducers({
-    user: userReducer // ✅ Correct reducer reference
+    user: userSlice // ✅ Correct reducer reference
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware)=>
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }),
     devTools: true, // ✅ Redux DevTools enabled ache
 });
+
+export const persistor = persistStore(store);
