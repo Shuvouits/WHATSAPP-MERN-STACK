@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage"
+import createFilter from "redux-persist-transform-filter";
 import {persistReducer, persistStore} from "redux-persist"
 import { userSlice } from "../features/userSlice.js"; // ✅ Default export properly import
 
@@ -11,12 +12,12 @@ const saveUserOnlyFilter = createFilter("user", ["user.user"])
 const persistConfig = {
     key: "user",
     storage,
-    whiteList: ["user"],
+    whitelist: ["user"],
     transforms: [saveUserOnlyFilter]
 }
 
 const rootReducer = combineReducers({
-    user: userSlice // ✅ Correct reducer reference
+    user: userSlice.reducer // ✅ Correct reducer reference
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
