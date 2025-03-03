@@ -1,34 +1,38 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage"
+import { persistReducer, persistStore } from "redux-persist";
 import createFilter from "redux-persist-transform-filter";
-import {persistReducer, persistStore} from "redux-persist"
-import { userSlice } from "../features/userSlice.js"; // ✅ Default export properly import
+import storage from "redux-persist/lib/storage";
+//slices
+import userSlice from "../features/userSlice";
 
-//saveUseronlyFilter
-const saveUserOnlyFilter = createFilter("user", ["user.user"])
+//Reducer : Reducer is a function that's work state & action . Always return new state
+//ReduxPersist : Automatics save state data.
+//createFilter: it's define which part will saved to the PersistStorage
+//whitelist: It's identified the executable part of Persist
 
+//saveUserOnlyFilter
+const saveUserOnlyFilter = createFilter("user", ["user"]);  //Only store user object
 
 //persist config
 const persistConfig = {
-    key: "user",
-    storage,
-    whitelist: ["user"],
-    transforms: [saveUserOnlyFilter]
-}
+  key: "user",
+  storage,
+  whitelist: ["user"],
+  transforms: [saveUserOnlyFilter],
+};
 
 const rootReducer = combineReducers({
-    user: userSlice.reducer // ✅ Correct reducer reference
+  user: userSlice,
 });
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware)=>
-        getDefaultMiddleware({
-            serializableCheck: false,
-        }),
-    devTools: true, // ✅ Redux DevTools enabled ache
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }), // Manage state smoothly
+  devTools: true,
 });
 
 export const persistor = persistStore(store);
