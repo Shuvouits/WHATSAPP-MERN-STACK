@@ -1,6 +1,7 @@
 import createHttpError from "http-errors";
 import { UserModel } from "../model/index.js";
 import validator from "validator";
+import bcrypt from "bcrypt";
 
 export const createUser = async (userData) => {
     const { name, email, picture, status, password } = userData;
@@ -70,3 +71,18 @@ export const createUser = async (userData) => {
     return user;
 
 }
+
+
+export const signUser = async (email, password) => {
+    const user = await UserModel.findOne({ email: email.toLowerCase() }).lean();  //lean convert plain javascript thats reduce processing and executing time to mongoose database
+  
+    //check if user exist
+    if (!user) throw createHttpError.NotFound("Invalid credentials.");
+  
+    //compare passwords
+    let passwordMatches = await bcrypt.compare(password, user.password);
+  
+    if (!passwordMatches) throw createHttpError.NotFound("Invalid credentials.");
+  
+    return user;
+  };
