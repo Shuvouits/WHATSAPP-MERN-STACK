@@ -1,3 +1,4 @@
 import UserModel from "./userModel.js";
+import ConversionModel from "./conversionModel.js"
 
-export { UserModel };
+export { UserModel, ConversionModel };
