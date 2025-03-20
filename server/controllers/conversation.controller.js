@@ -3,6 +3,8 @@ import logger from "../configs/logger.config.js";
 
 import {createConversation,doesConversationExist} from "../services/conversation.service.js";
 
+import { findUser } from "../services/user.service.js";
+
 export const create_open_conversation = async (req, res, next) => {
     try {
         // console.log(req.user);
