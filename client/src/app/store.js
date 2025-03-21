@@ -4,6 +4,7 @@ import createFilter from "redux-persist-transform-filter";
 import storage from "redux-persist/lib/storage";
 //slices
 import userSlice from "../features/userSlice";
+import chatSlice from "../features/chatSlice";
 
 //Reducer : Reducer is a function that's work state & action . Always return new state
 //ReduxPersist : Automatics save state data.
@@ -23,6 +24,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userSlice,
+  chat: chatSlice,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
