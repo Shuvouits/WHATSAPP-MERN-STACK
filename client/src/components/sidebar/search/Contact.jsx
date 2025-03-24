@@ -1,23 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { open_create_conversation } from "../../../features/chatSlice";
 
-export default function Contact({ contact }) {
-
+export default function Contact({ contact, setSearchResults }) {
   const dispatch = useDispatch();
-   const { user } = useSelector((state) => state.user);
-   const { token } = user;
-   const values = {
-     receiver_id: contact._id,
-     token,
-   };
-   const openConversation = () => {
-     dispatch(open_create_conversation(values));
-   };
-
-
-    return (
-     
-      <li
+  const { user } = useSelector((state) => state.user);
+  const { token } = user;
+  const values = {
+    receiver_id: contact._id,
+    token,
+  };
+  const openConversation = async () => {
+    await dispatch(open_create_conversation(values));
+    setSearchResults([]);
+  };
+  return (
+    <li
       onClick={() => openConversation()}
       className="list-none h-[72px] hover:dark:bg-dark_bg_2 cursor-pointer dark:text-dark_text_1 px-[10px]"
     >
@@ -53,6 +50,5 @@ export default function Contact({ contact }) {
       {/*Border*/}
       <div className="ml-16 border-b dark:border-b-dark_border_1"></div>
     </li>
-    
-    );
-  }
+  );
+}

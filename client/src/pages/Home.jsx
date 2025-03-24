@@ -5,6 +5,7 @@ import { getConversations } from "../features/chatSlice";
 import { ChatContainer, WhatsappHome } from "../components/Chat";
 
 
+
 export default function Home() {
 
   const dispatch = useDispatch();
@@ -33,6 +34,6 @@ export default function Home() {
     </div>
   </div>
 
-  
+
   );
 }
