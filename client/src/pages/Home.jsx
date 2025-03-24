@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Sidebar } from "../components/sidebar";
 import { getConversations } from "../features/chatSlice";
+import { WhatsappHome } from "../components/Chat";
 
 
 export default function Home() {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
+
+  const { activeConversation } = useSelector((state) => state.chat);
+  console.log("activeConversation", activeConversation);
 
   //get Conversations
   useEffect(() => {
@@ -20,11 +24,10 @@ export default function Home() {
   return (
     <div className="h-screen dark:bg-dark_bg_1 flex items-center justify-center py-[19px] overflow-hidden">
       {/*container*/}
-      <div className="container h-screen">
+      <div className="container h-screen flex py-[19px]">
         {/*Sidebar*/}
-        <h1>Hello</h1>
         <Sidebar />
-
+        {activeConversation._id ? "home" : <WhatsappHome />}
       </div>
     </div>
   );

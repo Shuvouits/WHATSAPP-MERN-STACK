@@ -8,10 +8,10 @@ import CloseIcon from './Close';
 import FilterIcon from './FilterIcon';
 import ReturnIcon from './Return';
 import SearchIcon from './Search'
-import dateHandler from './'
+import Logo from './Logo'
 
 export{
-  
+  Logo,
   SearchIcon,
   ReturnIcon,
   FilterIcon,
